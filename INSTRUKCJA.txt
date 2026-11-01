@@ -1,0 +1,7 @@
+1. Rozpakuj zip. Wrzuc ZAWARTOSC (nie folder nadrzedny) do repo na GitHubie.
+2. Przez przegladarke ukryty folder .github czesto sie gubi. Jesli w repo nie ma
+   .github/workflows/build.yml, wejdz: Add file -> Create new file,
+   w nazwie wpisz  .github/workflows/build.yml  i wklej tresc pliku
+   BUILD_YML_wklej_do_.github-workflows.yml
+3. Usun stary .github/workflows/gradle.yml (kosz -> Commit).
+4. Actions -> build -> po zakonczeniu: Artifacts -> rockstar-client-jar.
