@@ -1,7 +1,6 @@
 name: build
 on:
   push:
-  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -17,20 +16,11 @@ jobs:
         with:
           java-version: '25'
           distribution: 'microsoft'
-      - name: gradlew executable
-        run: chmod +x ./gradlew
-      - name: build
-        run: ./gradlew build --no-daemon
+      - run: chmod +x ./gradlew
+      - run: ./gradlew build --no-daemon
       - uses: actions/upload-artifact@v7
         with:
           name: rockstar-client-jar
           path: |
             build/libs/*.jar
             !build/libs/*-sources.jar
-      - name: release (tylko tag v*)
-        if: startsWith(github.ref, 'refs/tags/v')
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          JAR=$(ls build/libs/*.jar | grep -v -- '-sources' | head -n 1)
-          gh release create "${{ github.ref_name }}" "$JAR" --title "${{ github.ref_name }}" --generate-notes
